@@ -43,10 +43,10 @@ func Connect(address string) (conn *Connection, err error) {
 func newConnection(nc net.Conn) *Connection {
 	return &Connection{
 		conn: nc,
-		buffered: bufio.ReadWriter{
+		buffered: *bufio.NewReadWriter(
 			bufio.NewReader(nc),
 			bufio.NewWriter(nc),
-		},
+		),
 	}
 }
 
